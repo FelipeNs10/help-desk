@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
-    <h1>tela login</h1>
+    <h1>Login</h1>
+    <% if (errorMessage) { %>
+        <p><%= errorMessage %></p>
+    <% } %>
+    <form action="/login" method="POST">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Ainda não tem uma conta? <a href="/register">Crie uma agora</a></p>
     
 
 </body>

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// modelo usuário
 const UserSchema = new mongoose.Schema({
     name: String,
     email: {
@@ -11,6 +12,7 @@ const UserSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User', UserSchema);
 
+//modelo do formulario
 const FormSchema = new mongoose.Schema({
     name: String,
     email: String,
