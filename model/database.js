@@ -1,5 +1,16 @@
 import mongoose from 'mongoose';
 
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: {
+        type: String,
+        unique: true,
+    },
+    password: String,
+});
+
+export const User = mongoose.model('User', UserSchema);
+
 const FormSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -7,9 +18,9 @@ const FormSchema = new mongoose.Schema({
     dob: Date,
     city: String,
     address: String
-})
+});
 
-export const Formdata = mongoose.model('Formdata', FormSchema); 
+export const Formdata = mongoose.model('Formdata', FormSchema);
 
 export const connectDB = async () => {
     try {
@@ -19,6 +30,4 @@ export const connectDB = async () => {
         console.log(error);
         process.exit(1)
     }
-
 }
-

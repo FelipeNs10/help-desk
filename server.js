@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { connectDB } from './module/database.js';
+import { connectDB } from './model/database.js';
+import router from './routes/userRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -8,12 +10,8 @@ const port = 8080;
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
 app.use(express.static('public'))
-
-app.get("/teste", (req, res) => { 
-    res.render("index")
-})
+app.use(router)
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
