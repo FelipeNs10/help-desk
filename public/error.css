@@ -1,32 +1,32 @@
-/* Estilos para o corpo do documento */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    text-align: center; /* Alinhar conteúdo centralmente */
-    padding-top: 50px; /* Espaçamento superior */
+    text-align: center; 
+    padding-top: 50px; 
 }
 
-/* Estilos para o título h1 */
+
 h1 {
     font-size: 36px;
-    color: #ff0000; /* Cor do título */
-    margin-bottom: 20px; /* Margem inferior */
+    color: #ff0000; 
+    margin-bottom: 20px; 
 }
 
-/* Estilos para o conteúdo dentro do marquee */
+
 marquee {
     display: block;
-    width: 80%; /* Largura do marquee */
-    margin: 0 auto; /* Centralizar o marquee horizontalmente */
+    width: 80%; 
+    margin: 0 auto; 
     padding: 20px;
-    background-color: #ffffff; /* Cor de fundo do marquee */
-    border: 2px solid #ccc; /* Borda do marquee */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    background-color: #ffffff; 
+    border: 2px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para o texto dentro do marquee */
+
 marquee p {
     font-size: 20px;
-    color: #333333; /* Cor do texto */
-    margin: 0; /* Remover margem padrão */
+    color: #333333; 
+    margin: 0; 
 }
