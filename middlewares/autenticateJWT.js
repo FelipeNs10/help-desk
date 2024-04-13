@@ -1,25 +1,17 @@
-import jwt from 'jsonwebtoken';
-
+// Middleware de autenticação JWT
 export const authenticateJWT = (req, res, next) => {
-    try {
-        console.log(req.cookies)
-        const token = req.cookies?.token
+    const token = req.cookies.token;
 
-        if (!token) {
-            return res.status(401).render("error",{ message: "Token ausente" });
-        }
-
+    if (token) {
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
-                return res.status(401).render("error",{ message: "Token ausente" });
+                return res.status(401).json({ message: "Unauthorized" });
             }
-
             req.user = decoded;
             next();
         });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server Error" });
+    } else {
+        res.status(401).json({ message: "Unauthorized" });
     }
 };
 

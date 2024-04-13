@@ -20,10 +20,11 @@ export function formHandler(req, res) {
 }
 
 export function notFoundHandler(req, res) {
-    res.status(404).render("error", { message: "Página não encontrada" })
+    res.status(404).render("404")
 }
 
 // controladores
+
 export async function loginController(req, res) {
     const { email, password } = req.body;
 
@@ -40,8 +41,10 @@ export async function loginController(req, res) {
 
         // Gera um token jwt e guarda em um cookie
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        res.cookie('token', token, { maxAge: 1000 * 60 , secure: true, httpOnly: true, sameSite: "none" });
-        console.log(req.cookies)
+        res.cookie('token', token, { secure: true, httpOnly: true });
+
+        // testando token
+        console.log(token)
 
         res.status(201).render("autenticado")
     } catch (error) {
@@ -64,11 +67,11 @@ export async function registerController(req, res) {
             name,
             email,
             password: hashedPassword
-            });
-            await user.save()
+        });
+        await user.save()
 
         // TODO: redirecionar para a tela de depois do login
-        res.status(201).redirect("/login")
+        res.status(201).redirect("/autenticado")
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
