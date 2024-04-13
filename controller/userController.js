@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { User } from '../model/database.js';
+import { User, FormData } from '../model/database.js';
 
 // handlers para a exibição so html
 export function indexHandler(req, res) {
@@ -15,6 +15,9 @@ export function registerHandler(req, res) {
     res.render("register", { errorMessage: "" })
 }
 
+export function formHandler(req, res) {
+    res.render("form")
+}
 
 export function notFoundHandler(req, res) {
     res.status(404).render("error", { message: "Página não encontrada" })
@@ -69,5 +72,30 @@ export async function registerController(req, res) {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
+    }
+}
+export async function formController(req, res) {
+    const { name, email, number, dob, city, address, message } = req.body;
+
+    try {
+        const userId = req.user.id;
+
+        // Criar uma nova entrada de formulário associada ao usuário
+        const formData = new FormData({
+            user: userId,
+            name,
+            email,
+            number,
+            dob,
+            city,
+            address,
+            message
+        });
+        await formData.save();
+
+        res.status(201).render("form-success");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro no servidor" });
     }
 }

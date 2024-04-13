@@ -1,5 +1,12 @@
 import express from "express"
-import { indexHandler, loginController, loginHandler, registerController, registerHandler } from "../controller/userController.js"
+import { indexHandler, 
+    loginController, 
+    loginHandler, 
+    registerController, 
+    registerHandler, 
+    formHandler,
+    formController
+} from "../controller/userController.js"
 import { authenticateJWT } from "../middlewares/autenticateJWT.js";
 
 const router = express.Router()
@@ -12,9 +19,8 @@ router.post("/login", loginController)
 router.get("/register", registerHandler)
 router.post("/register", registerController)
 
-// rota de teste
-router.get("/autenticado", authenticateJWT, (req, res) => {
-    res.render("autenticado")
-})
+//form
+router.get("/form", authenticateJWT, formHandler)
+router.post("/form", authenticateJWT, formController)
 
 export default router
