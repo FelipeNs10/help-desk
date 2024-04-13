@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { connectDB } from './model/database.js';
 import router from './routes/userRoutes.js';
 import { notFoundHandler } from './controller/userController.js';
@@ -12,10 +13,11 @@ const port = 8080;
 // config
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.static('public'))
 app.use(router)
 
-// 404
+// error
 app.use(notFoundHandler)
 
 app.set("view engine", "ejs");

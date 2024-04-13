@@ -16,15 +16,14 @@ export function registerHandler(req, res) {
 }
 
 export function formHandler(req, res) {
-    res.render("form")
+    res.render("form", { message: "" })
 }
 
 export function notFoundHandler(req, res) {
-    res.status(404).render("404")
+    res.status(404).render("error", { message: "Página não encontrada" })
 }
 
 // controladores
-
 export async function loginController(req, res) {
     const { email, password } = req.body;
 
@@ -41,12 +40,10 @@ export async function loginController(req, res) {
 
         // Gera um token jwt e guarda em um cookie
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        res.cookie('token', token, { secure: true, httpOnly: true });
+        res.cookie('token', token, { maxAge: 1000 * 60 , secure: true, httpOnly: true, sameSite: "none" });
+        console.log(req.cookies)
 
-        // testando token
-        console.log(token)
-
-        res.status(201).render("autenticado")
+        res.status(201).redirect("/form")
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
@@ -67,11 +64,10 @@ export async function registerController(req, res) {
             name,
             email,
             password: hashedPassword
-        });
-        await user.save()
+            });
+            await user.save()
 
-        // TODO: redirecionar para a tela de depois do login
-        res.status(201).redirect("/autenticado")
+        res.status(201).redirect("/login")
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
@@ -94,9 +90,10 @@ export async function formController(req, res) {
             address,
             message
         });
+        console.log(".")
         await formData.save();
 
-        res.status(201).render("form-success");
+        res.status(201).render("form", { message: "Formulário enviado com sucesso!" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erro no servidor" });
