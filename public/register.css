@@ -1,7 +1,7 @@
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
-    color: #333;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,17 +10,17 @@ body {
     height: 100vh;
 }
 
-.container {
+.page {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 390px;
+    color: #333;
 }
 
 form {
@@ -36,8 +36,8 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
     padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
 }
@@ -50,7 +50,6 @@ button {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -58,8 +57,9 @@ button:hover {
 }
 
 p {
-    text-align: end;
-    margin-top: 309px;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
 }
 
 a {
