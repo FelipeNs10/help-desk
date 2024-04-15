@@ -1,0 +1,32 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center; 
+    padding-top: 50px; 
+}
+
+
+h1 {
+    font-size: 36px;
+    color: #ff0000; 
+    margin-bottom: 20px; 
+}
+
+
+marquee {
+    display: block;
+    width: 80%; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #ffffff; 
+    border: 2px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+marquee p {
+    font-size: 20px;
+    color: #333333; 
+    margin: 0; 
+}
