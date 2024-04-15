@@ -5,7 +5,7 @@ import { indexHandler,
     registerController, 
     registerHandler, 
     formHandler,
-    formController
+    formController,
 } from "../controller/userController.js"
 import { authenticateJWT } from "../middlewares/autenticateJWT.js";
 
