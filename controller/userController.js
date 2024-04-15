@@ -8,11 +8,11 @@ export function indexHandler(req, res) {
 }
  
 export function loginHandler(req, res) {
-    res.render("login", { errorMessage: "" })
+    res.render("login", { message: "" })
 }
 
 export function registerHandler(req, res) {
-    res.render("register", { errorMessage: "" })
+    res.render("register", { message: "" })
 }
 
 export function formHandler(req, res) {
@@ -30,18 +30,17 @@ export async function loginController(req, res) {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).render("login", { errorMessage: "Usuário não encontrado." });
+            return res.status(404).render("login", { message: "Usuário não encontrado." });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).render("login", { errorMessage: "Senha incorreta." });
+            return res.status(401).render("login", { message: "Senha incorreta." });
         }
 
         // Gera um token jwt e guarda em um cookie
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         res.cookie('token', token, { maxAge: 1000 * 60 , secure: true, httpOnly: true, sameSite: "none" });
-        console.log(req.cookies)
 
         res.status(201).redirect("/form")
     } catch (error) {
@@ -56,7 +55,7 @@ export async function registerController(req, res) {
     try {
         let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).render("register", { errorMessage: "Usuário ja existe." });
+            return res.status(400).render("register", { message: "Usuário ja existe." });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -69,8 +68,12 @@ export async function registerController(req, res) {
 
         res.status(201).redirect("/login")
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        if (error.name === "ValidationError") {
+            return res.status(400).render("register", { message: "Por favor, forneça informações válidas." });
+        } else {
+            console.error(error);
+            return res.status(500).json({ message: "Erro no servidor" });
+        }
     }
 }
 export async function formController(req, res) {

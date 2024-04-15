@@ -9,12 +9,15 @@
 </head>
 <body>
     <div class="page">
-        <form method="POST" class="formLogin">
+        <form action="/login" method="POST" class="formLogin">
             <h1>Login</h1>
+            <% if (message) { %>
+                <p><%= message %></p>
+            <% } %>
             <label for="email">E-mail</label>
-            <input type="email" placeholder="Digite seu e-mail" autofocus="true" />
+            <input type="email" name="email" placeholder="Digite seu e-mail" autofocus="true" required />
             <label for="password">Senha</label>
-            <input type="password" placeholder="Digite seu e-mail" />
+            <input type="password" name="password" placeholder="Digite seu e-mail" />
             <input type="submit" value="Acessar" class="btn" />
         </form>
 	<p>Ainda não tem uma conta? <a href="/register">Crie uma agora</a></p>
